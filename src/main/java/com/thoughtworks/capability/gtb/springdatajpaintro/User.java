@@ -2,10 +2,8 @@ package com.thoughtworks.capability.gtb.springdatajpaintro;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,4 +19,11 @@ public class User {
     private Long age;
     private String avatar;
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Education> educationList;
+
+    public void addEducation(Education education){
+        educationList.add(education);
+    }
 }
